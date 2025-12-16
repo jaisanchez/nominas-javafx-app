@@ -1,0 +1,1 @@
+Importante: Para que esta aplicación funcione correctamente, es necesario tener instalado Java Runtime Environment (JRE). Si no lo tiene instalado o su versión no es compatible, por favor instale la versión recomendada: JRE 8 Update 202 (jre-8u202-windows-i586.exe). Simplemente haz doble clic sobre el archivo para iniciar la instalación.

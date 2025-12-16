@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="CalcuNominaFxml.jnlp">
+  <information>
+    <title>CalcuNominaFxml</title>
+    <vendor>username</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="CalcuNominaFxml.jar" size="20587" download="eager" />
+    <jar href="lib\javafx-swt.jar" size="36221" download="eager" />
+    <jar href="lib\javafx.base.jar" size="747763" download="eager" />
+    <jar href="lib\javafx.controls.jar" size="2604495" download="eager" />
+    <jar href="lib\javafx.fxml.jar" size="126743" download="eager" />
+    <jar href="lib\javafx.graphics.jar" size="4410443" download="eager" />
+    <jar href="lib\javafx.media.jar" size="284481" download="eager" />
+    <jar href="lib\javafx.swing.jar" size="88135" download="eager" />
+    <jar href="lib\javafx.web.jar" size="722809" download="eager" />
+    <jar href="lib\jdk.jsobject.jar" size="1676" download="eager" />
+    <jar href="lib\jfx.incubator.input.jar" size="27035" download="eager" />
+    <jar href="lib\jfx.incubator.richtext.jar" size="315187" download="eager" />
+    <jar href="lib\json-20230618.jar" size="73447" download="eager" />
+    <jar href="lib\sqlite-jdbc-3.8.11.2.jar" size="5575351" download="eager" />
+  </resources>
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="CalcuNominaFxml" >
+    <param name="requiredFXVersion" value="8.0+"/>
+  </applet-desc>
+  <jfx:javafx-desc  width="800" height="600" main-class="a_main.A_Main"  name="CalcuNominaFxml" />
+  <update check="always"/>
+</jnlp>

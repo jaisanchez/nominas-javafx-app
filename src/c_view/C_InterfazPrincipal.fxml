@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Esta vista define una interfaz de usuario basada en pestañas que permite:
+    - Ingresar datos para calcular una nómina.
+    - Añadir gastos adicionales.
+    - Gestionar retenciones.
+    - Ver un historial de cálculos realizados.
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Text?>
+
+<!-- Controlador asociado a esta vista -->
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="b_controllers.B_InterfazPrincipalController">
+
+    <!-- =================== MENÚ Y TÍTULO SUPERIOR =================== -->
+    <top>
+        <VBox spacing="5">
+            <!-- Menú superior -->
+            <MenuBar>
+                <menus>
+                    <Menu text="File">
+                        <items>
+                            <MenuItem text="Guardar Configuración" onAction="#guardarConfiguracion" accelerator="Ctrl+G"/>
+                            <MenuItem text="Cargar Configuración" onAction="#cargarConfiguracion" accelerator="Ctrl+C"/>
+                            <MenuItem text="Salir" onAction="#salirAplicacion" accelerator="Ctrl+Q"/>
+                        </items>
+                    </Menu>
+                </menus>
+            </MenuBar>
+
+            <!-- Franja con el título de la aplicación -->
+            <Label text="Calculadora de Nómina" 
+       style="-fx-font-size: 40px; -fx-font-weight: bold; -fx-text-fill: #008287;"
+       alignment="CENTER"
+       maxWidth="Infinity"/>
+        </VBox>
+    </top>
+    
+    <!-- =================== CONTENIDO CENTRAL =================== -->
+    <center>
+        <TabPane fx:id="tabPane" prefWidth="800" prefHeight="600">
+            <tabs>
+
+                <!-- === PESTAÑA: Datos Salariales === -->
+                <!-- Permite introducir todos los conceptos salariales base -->
+                <Tab text="Datos Salariales">
+                    <content>
+                        <ScrollPane fitToWidth="true">
+                            <GridPane hgap="10" vgap="5">
+                                <padding>
+                                    <Insets top="20" right="20" bottom="20" left="20"/>
+                                </padding>
+                                
+                                <!-- Campos para ingresar horas y pluses -->
+                                <Label text="Horas Normales:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                <TextField fx:id="tfHorasNormales" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                                <Label text="Horas Nocturnas:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                <TextField fx:id="tfHorasNocturnas" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                                <!-- NUEVO: Horas Extras -->
+                                <Label text="Horas Extras:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                <TextField fx:id="tfHorasExtras" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                                <Label text="Horas Festivas:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                                <TextField fx:id="tfHorasFestivas" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                                <Label text="Salario Base:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                                <TextField fx:id="tfSalarioBase" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+                                <Label text="Plus Turnicidad:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                                <TextField fx:id="tfPlusTurnicidad" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+                                <Label text="Plus Nocturnidad:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                                <TextField fx:id="tfPlusNocturnidad" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+                                <!-- NUEVO: Plus Horas Extras -->
+                                <Label text="Plus Horas Extras:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                                <TextField fx:id="tfPlusHorasExtras" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+
+                                <Label text="Plus Festivos:" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+                                <TextField fx:id="tfPlusFestivos" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+
+                                <Label text="Prorrata Paga Extra:" GridPane.rowIndex="9" GridPane.columnIndex="0"/>
+                                <TextField fx:id="tfProrrataPagaExtra" GridPane.rowIndex="9" GridPane.columnIndex="1"/>
+
+                                <Label text="Prorrata Vacaciones:" GridPane.rowIndex="10" GridPane.columnIndex="0"/>
+                                <TextField fx:id="tfProrrataVacaciones" GridPane.rowIndex="10" GridPane.columnIndex="1"/>
+
+                                <Label text="Compensación Fin Contrato:" GridPane.rowIndex="11" GridPane.columnIndex="0"/>
+                                <TextField fx:id="tfCompensacionFinContrato" GridPane.rowIndex="11" GridPane.columnIndex="1"/>
+
+                                <Label text="Atrasos:" GridPane.rowIndex="12" GridPane.columnIndex="0"/>
+                                <TextField fx:id="tfAtrasos" GridPane.rowIndex="12" GridPane.columnIndex="1"/>
+
+                                <!-- Área de texto para resultados de la pestaña Datos Salariales -->
+                                <Label text="Resumen:" GridPane.rowIndex="14" GridPane.columnIndex="0"/>
+                                <TextArea fx:id="taDatosSalariales" prefWidth="400" prefHeight="205" prefRowCount="8" wrapText="true" 
+                                          GridPane.rowIndex="14" GridPane.columnIndex="1" GridPane.rowSpan="3"/>
+
+                            </GridPane>
+                        </ScrollPane>
+                    </content>
+                </Tab>
+
+                <!-- === PESTAÑA: Gastos Adicionales === -->
+                <!-- Permite agregar costes adicionales exentos de IRPF -->
+                <Tab text="Gastos Adicionales">
+                    <content>
+                        <ScrollPane fitToWidth="true">
+                            <GridPane hgap="10" vgap="5">
+                                <padding>
+                                    <Insets top="20" right="20" bottom="20" left="20"/>
+                                </padding>
+                                
+                                <Label text="Dieta Diaria (€):" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                <TextField fx:id="tfDietaDiaria" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                                
+                                <Label text="Días con Dieta:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                <TextField fx:id="tfDiasConDieta" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                                
+                                <Label text="Kilómetros Recorridos:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                <TextField fx:id="tfKilometrosRecorridos" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                                
+                                <Label text="Precio por Km (€):" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                                <TextField fx:id="tfPrecioPorKilometro" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                                
+                                <Label text="Noches Fuera:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                                <TextField fx:id="tfNochesFuera" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                                
+                                <Label text="Precio por Noche (€):" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                                <TextField fx:id="tfPrecioPorNoche" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+                                
+                                <Label text="Transporte Público (€):" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                                <TextField fx:id="tfTotalTransportePublico" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+                                
+                                <Label text="Otros gastos:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                                <TextField fx:id="tfOtrosGastos" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+                                
+                                <!-- Área de resultados de la pestaña "Gastos Adicionales -->
+                                <Label text="Resumen:" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+                                <TextArea fx:id="taGastosAdicionales" prefRowCount="8" wrapText="true" 
+                                          GridPane.rowIndex="8" GridPane.columnIndex="1" GridPane.rowSpan="3"/>
+                            </GridPane>
+                        </ScrollPane>
+                    </content>
+                </Tab>
+
+                <!-- === PESTAÑA: Retenciones === -->
+                <!-- Permite definir las tasas de cotización para empresa y trabajador -->
+                <Tab text="Retenciones">
+                    <content>
+                        <ScrollPane fitToWidth="true">
+                            
+                            <GridPane hgap="10" vgap="5">
+                                <padding>
+                                    <Insets top="20" right="20" bottom="20" left="20"/>
+                                </padding>
+                                <Label text="TODOS LOS VALORES SON PORCENTAJES (%)" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+                                <Label text="TASAS APORTADAS POR LA EMPRESA" style="-fx-font-weight: bold;" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+                                
+                                <!-- Comentarios explicativos con Tooltips en cada campo -->
+                                <Label text="Conting. comunes:" GridPane.rowIndex="2" GridPane.columnIndex="0" graphicTextGap="5" contentDisplay="RIGHT">
+                                    <graphic>
+                                        <StackPane>
+                                            <Circle radius="8" fill="transparent" stroke="#3498db" strokeWidth="2"/>
+                                            <Text text="i" style="-fx-font-weight: bold; -fx-font-size: 12px; -fx-fill: #3498db;" fontSmoothingType="LCD"/>
+                                        </StackPane>
+                                    </graphic>
+                                    <tooltip>
+                                        <Tooltip text="Cotización destinada a cubrir bajas por enfermedad, maternidad, etc." style="-fx-font-size: 13px;"/>
+                                    </tooltip>
+                                </Label>
+                                <TextField fx:id="tfContingenciasComunesEmpresa" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                                
+                                <Label text="AT y EP:" GridPane.rowIndex="3" GridPane.columnIndex="0" graphicTextGap="5" contentDisplay="RIGHT">
+                                    <graphic>
+                                        <StackPane>
+                                            <Circle radius="8" fill="transparent" stroke="#3498db" strokeWidth="2"/>
+                                            <Text text="i" style="-fx-font-weight: bold; -fx-font-size: 12px; -fx-fill: #3498db;" fontSmoothingType="LCD"/>
+                                        </StackPane>
+                                    </graphic>
+                                    <tooltip>
+                                        <Tooltip text="Accidentes de trabajo y enfermedades profesionales cubiertos por la empresa." style="-fx-font-size: 13px;"/>
+                                    </tooltip>
+                                </Label>
+                                <TextField fx:id="tfATEPEmpresa" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                                
+                                <Label text="Desempleo:" GridPane.rowIndex="4" GridPane.columnIndex="0" graphicTextGap="5" contentDisplay="RIGHT">
+                                    <graphic>
+                                        <StackPane>
+                                            <Circle radius="8" fill="transparent" stroke="#3498db" strokeWidth="2"/>
+                                            <Text text="i" style="-fx-font-weight: bold; -fx-font-size: 12px; -fx-fill: #3498db;" fontSmoothingType="LCD"/>
+                                        </StackPane>
+                                    </graphic>
+                                    <tooltip>
+                                        <Tooltip text="Cuota para cubrir prestaciones por desempleo." style="-fx-font-size: 13px;"/>
+                                    </tooltip>
+                                </Label>
+                                <TextField fx:id="tfDesempleoEmpresa" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                                
+                                <Label text="Form. profesional:" GridPane.rowIndex="5" GridPane.columnIndex="0" graphicTextGap="5" contentDisplay="RIGHT">
+                                    <graphic>
+                                        <StackPane>
+                                            <Circle radius="8" fill="transparent" stroke="#3498db" strokeWidth="2"/>
+                                            <Text text="i" style="-fx-font-weight: bold; -fx-font-size: 12px; -fx-fill: #3498db;" fontSmoothingType="LCD"/>
+                                        </StackPane>
+                                    </graphic>
+                                    <tooltip>
+                                        <Tooltip text="Aporta al sistema de formación continua de los trabajadores." style="-fx-font-size: 13px;"/>
+                                    </tooltip>
+                                </Label>
+                                <TextField fx:id="tfFormacionProfesionalEmpresa" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+                                
+                                <Label text="FOGASA:" GridPane.rowIndex="6" GridPane.columnIndex="0" graphicTextGap="5" contentDisplay="RIGHT">
+                                    <graphic>
+                                        <StackPane>
+                                            <Circle radius="8" fill="transparent" stroke="#3498db" strokeWidth="2"/>
+                                            <Text text="i" style="-fx-font-weight: bold; -fx-font-size: 12px; -fx-fill: #3498db;" fontSmoothingType="LCD"/>
+                                        </StackPane>
+                                    </graphic>
+                                    <tooltip>
+                                        <Tooltip text="Fondo que cubre indemnizaciones por insolvencia del empleador." style="-fx-font-size: 13px;"/>
+                                    </tooltip>
+                                </Label>
+                                <TextField fx:id="tfFOGASAEmpresa" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+                                
+                                <Label text="M.E.I.:" GridPane.rowIndex="7" GridPane.columnIndex="0" graphicTextGap="5" contentDisplay="RIGHT">
+                                    <graphic>
+                                        <StackPane>
+                                            <Circle radius="8" fill="transparent" stroke="#3498db" strokeWidth="2"/>
+                                            <Text text="i" style="-fx-font-weight: bold; -fx-font-size: 12px; -fx-fill: #3498db;" fontSmoothingType="LCD"/>
+                                        </StackPane>
+                                    </graphic>
+                                    <tooltip>
+                                        <Tooltip text="Mecanismo de Equidad Intergeneracional para reforzar las pensiones futuras." style="-fx-font-size: 13px;"/>
+                                    </tooltip>
+                                </Label>
+                                <TextField fx:id="tfPensionesMEIEmpresa" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+                                
+                                <Label text="TASAS APORTADAS POR EL TRABAJADOR" style="-fx-font-weight: bold;" GridPane.rowIndex="8" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+                                
+                                <Label text="IRPF:" GridPane.rowIndex="9" GridPane.columnIndex="0" graphicTextGap="5" contentDisplay="RIGHT">
+                                    <graphic>
+                                        <StackPane>
+                                            <Circle radius="8" fill="transparent" stroke="#3498db" strokeWidth="2"/>
+                                            <Text text="i" style="-fx-font-weight: bold; -fx-font-size: 12px; -fx-fill: #3498db;" fontSmoothingType="LCD"/>
+                                        </StackPane>
+                                    </graphic>
+                                    <tooltip>
+                                        <Tooltip text="Impuesto sobre la Renta de las Personas Físicas retenido mensualmente." style="-fx-font-size: 13px;"/>
+                                    </tooltip>
+                                </Label>
+                                <TextField fx:id="tfIRPF" GridPane.rowIndex="9" GridPane.columnIndex="1"/>
+                                
+                                <Label text="Conting. comunes:" GridPane.rowIndex="10" GridPane.columnIndex="0" graphicTextGap="5" contentDisplay="RIGHT">
+                                    <graphic>
+                                        <StackPane>
+                                            <Circle radius="8" fill="transparent" stroke="#3498db" strokeWidth="2"/>
+                                            <Text text="i" style="-fx-font-weight: bold; -fx-font-size: 12px; -fx-fill: #3498db;" fontSmoothingType="LCD"/>
+                                        </StackPane>
+                                    </graphic>
+                                    <tooltip>
+                                        <Tooltip text="Cuota del trabajador para contingencias como enfermedad o maternidad." style="-fx-font-size: 13px;"/>
+                                    </tooltip>
+                                </Label>
+                                <TextField fx:id="tfContingenciasComunesTrabajador" GridPane.rowIndex="10" GridPane.columnIndex="1"/>
+                                
+                                <Label text="Desempleo:" GridPane.rowIndex="11" GridPane.columnIndex="0" graphicTextGap="5" contentDisplay="RIGHT">
+                                    <graphic>
+                                        <StackPane>
+                                            <Circle radius="8" fill="transparent" stroke="#3498db" strokeWidth="2"/>
+                                            <Text text="i" style="-fx-font-weight: bold; -fx-font-size: 12px; -fx-fill: #3498db;" fontSmoothingType="LCD"/>
+                                        </StackPane>
+                                    </graphic>
+                                    <tooltip>
+                                        <Tooltip text="Parte del salario destinada a cubrir el seguro de desempleo del trabajador." style="-fx-font-size: 13px;"/>
+                                    </tooltip>
+                                </Label>
+                                <TextField fx:id="tfDesempleoTrabajador" GridPane.rowIndex="11" GridPane.columnIndex="1"/>
+                                
+                                <Label text="Form. profesional:" GridPane.rowIndex="12" GridPane.columnIndex="0" graphicTextGap="5" contentDisplay="RIGHT">
+                                    <graphic>
+                                        <StackPane>
+                                            <Circle radius="8" fill="transparent" stroke="#3498db" strokeWidth="2"/>
+                                            <Text text="i" style="-fx-font-weight: bold; -fx-font-size: 12px; -fx-fill: #3498db;" fontSmoothingType="LCD"/>
+                                        </StackPane>
+                                    </graphic>
+                                    <tooltip>
+                                        <Tooltip text="Aporta a la formación y reciclaje profesional del trabajador." style="-fx-font-size: 13px;"/>
+                                    </tooltip>
+                                </Label>
+                                <TextField fx:id="tfFormacionProfesionalTrabajador" GridPane.rowIndex="12" GridPane.columnIndex="1"/>
+                                
+                                <Label text="M.E.I.:" GridPane.rowIndex="13" GridPane.columnIndex="0" graphicTextGap="5" contentDisplay="RIGHT">
+                                    <graphic>
+                                        <StackPane>
+                                            <Circle radius="8" fill="transparent" stroke="#3498db" strokeWidth="2"/>
+                                            <Text text="i" style="-fx-font-weight: bold; -fx-font-size: 12px; -fx-fill: #3498db;" fontSmoothingType="LCD"/>
+                                        </StackPane>
+                                    </graphic>
+                                    <tooltip>
+                                        <Tooltip text="Contribución adicional del trabajador al fondo de pensiones futuras (MEI)." style="-fx-font-size: 13px;"/>
+                                    </tooltip>
+                                </Label>
+                                <TextField fx:id="tfPensionesMEITrabajador" GridPane.rowIndex="13" GridPane.columnIndex="1"/>
+                                
+                                <Label text="Resumen:" GridPane.rowIndex="14" GridPane.columnIndex="0"/>
+                                <TextArea fx:id="taRetenciones" prefHeight="130" prefRowCount="4" GridPane.rowIndex="14" GridPane.columnIndex="1" GridPane.rowSpan="3"/>
+                            </GridPane>
+                        </ScrollPane>
+                    </content>
+                </Tab>
+
+                <!-- === PESTAÑA: Historial === -->
+                <!-- Muestra el historial de cálculos realizados y permite eliminarlos -->
+                <Tab text="Historial">
+                    <content>
+                        <VBox spacing="10" alignment="CENTER">
+                            <padding>
+                                <Insets top="10" right="20" bottom="10" left="20"/>
+                            </padding>
+                            <ListView fx:id="lvHistoriallv" prefHeight="600.0"/>
+                            <HBox spacing="10">
+                                <Button text="Ver Historial" onAction="#verHistorial" />
+                                <Button text="Eliminar Registro" onAction="#eliminarRegistro" />
+                            </HBox>
+                        </VBox>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </center>
+
+    <!-- =================== PIE DE PÁGINA =================== -->
+    <!-- Botones disponibles en la parte inferior -->
+    <bottom>
+        <HBox spacing="10" alignment="CENTER">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <Button text="Calcular Nómina" onAction="#calcularNomina" style="-fx-font-weight: bold;"/>
+            <Button text="Guardar Cálculo" onAction="#guardarCalculo"/>
+            <Button text="Guardar Configuración" onAction="#guardarConfiguracion"/>
+            <Button text="Cargar Configuración" onAction="#cargarConfiguracion"/>
+            <Button text="Salir" onAction="#salirAplicacion"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>
