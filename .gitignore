@@ -1,0 +1,6 @@
+# Ejecutables
+*.exe
+
+# JDK / JRE
+jre*
+jdk*
