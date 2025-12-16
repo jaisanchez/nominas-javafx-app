@@ -75,13 +75,13 @@ La aplicación se iniciará mostrando la interfaz gráfica desarrollada con Java
 ## 📸 Capturas de la aplicación
 
 ### Datos salariales
-![Pantalla principal](docs/screenshots/salary data-screen.png)
+![Pantalla principal](docs/screenshots/salaryData-screen.png)
 
 ### Retenciones
 ![Cálculo de nóminas](docs/screenshots/withholdings-screen.png)
 
 ### Guardado y carga de configuración
-![Gestión de empleados](docs/screenshots/save & load-screen.png)
+![Gestión de empleados](docs/screenshots/save&load-screen.png)
 
 ### Registros
 ![Gestión de empleados](docs/screenshots/registry-screen.png)
