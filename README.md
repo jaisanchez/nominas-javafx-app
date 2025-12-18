@@ -88,6 +88,12 @@ La aplicación se iniciará mostrando la interfaz gráfica desarrollada con Java
 
 ---
 
+## Demo
+
+[Ver video](https://vimeo.com/1147681680?fl=pl&fe=sh)
+
+---
+
 ## 📌 Estado del proyecto
 
 ✔ Proyecto funcional  
