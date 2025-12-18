@@ -2,7 +2,7 @@
 
 Proyecto **formativo** desarrollado durante el Grado Superior en **Desarrollo de Aplicaciones Multiplataforma (DAM)**.
 
-Se trata de una aplicación de escritorio para el **cálculo de nóminas y gestión básica de empleados**, desarrollada con **Java y JavaFX**, con persistencia de datos en base de datos relacional.
+Se trata de una aplicación de escritorio para el **cálculo y gestión de nóminas**, desarrollada con **Java y JavaFX**, con persistencia de datos en base de datos relacional.
 
 ---
 
